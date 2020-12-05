@@ -1,0 +1,44 @@
+.addRecipeFormContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+}
+
+.addRecipeForm {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 600px;
+}
+
+mat-form-field {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.actions {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.save-recipe {
+    margin-top: 10px;
+}
+
+.actions > button {
+    margin-right: 5px;
+}
+
+@media (max-width: 448px) {
+    
+    .actions > button {
+        margin-bottom: 5px;
+    }
+
+    .actions > button:last-child {
+        margin-bottom: 0px;
+    }
+}

@@ -1,0 +1,38 @@
+.recipeName {
+    font-size: 32px;
+    padding-bottom: 10px;
+}
+
+.cookingTime {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.recipeShortDescription {
+    font-size: 18px;
+    padding-bottom: 5px;
+}
+
+.recipeFullDescription {
+    font-size: 24px;
+    padding-bottom: 5px;
+}
+
+mat-card-actions {
+    margin-bottom: 0px;
+}
+
+mat-card-actions > button {
+    margin-right: 5px;
+}
+
+.ql-container {
+    height: 100px;
+}
+
+@media(max-width: 600px) {
+    .recipePreview {
+        margin-bottom: 5px;
+    }
+}
