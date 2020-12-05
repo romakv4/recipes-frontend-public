@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "recipes-frontend": {
+    "recipes-frontend-public": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/recipes-frontend",
+            "outputPath": "dist/recipes-frontend-public",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -99,21 +99,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "recipes-frontend:build"
+            "browserTarget": "recipes-frontend-public:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "recipes-frontend:build:production"
+              "browserTarget": "recipes-frontend-public:build:production"
             },
             "admin": {
-              "browserTarget": "recipes-frontend:build:admin"
+              "browserTarget": "recipes-frontend-public:build:admin"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "recipes-frontend:build"
+            "browserTarget": "recipes-frontend-public:build"
           }
         },
         "test": {
@@ -151,16 +151,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "recipes-frontend:serve"
+            "devServerTarget": "recipes-frontend-public:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "recipes-frontend:serve:production"
+              "devServerTarget": "recipes-frontend-public:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "recipes-frontend"
+  "defaultProject": "recipes-frontend-public"
 }
