@@ -1,6 +1,6 @@
 {
-    "name": "RecipesAdminApp",
-    "short_name": "RecipesAdminApp",
+    "name": "Книга рецептов",
+    "short_name": "Книга рецептов",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
