@@ -112,7 +112,7 @@ export class AddRecipeFormComponent implements OnInit {
     $event.preventDefault();
     if (this.ingredients.length !== 1) {
       this.ingredients.pop();
-      this.ingredientsControl.removeAt(this.ingredients.length - 1);
+      this.ingredientsControl.removeAt(this.ingredients.length);
     }
   }
 
@@ -126,7 +126,7 @@ export class AddRecipeFormComponent implements OnInit {
     $event.preventDefault();
     if (this.recipeSteps.length !== 1) {
       this.recipeSteps.pop();
-      this.fullDescriptionControl.removeAt(this.recipeSteps.length - 1);
+      this.fullDescriptionControl.removeAt(this.recipeSteps.length);
     }
   }
 
