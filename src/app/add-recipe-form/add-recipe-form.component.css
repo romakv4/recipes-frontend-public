@@ -32,6 +32,10 @@ mat-form-field {
     margin-right: 5px;
 }
 
+body {
+    overscroll-behavior: contain;
+}
+
 @media (max-width: 448px) {
     
     .actions > button {
