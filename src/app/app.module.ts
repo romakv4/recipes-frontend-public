@@ -4,6 +4,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
 import { MaterialModule } from './material.module';
 import { AppComponent } from './app.component';
 import { RecipesContainerComponent } from './recipes-container/recipes-container.component';
@@ -26,6 +28,7 @@ import { AddRecipeFormComponent } from './add-recipe-form/add-recipe-form.compon
     MaterialModule,
     HttpClientModule,
     AppRoutingModule,
+    NgxSkeletonLoaderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
