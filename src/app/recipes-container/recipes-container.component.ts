@@ -10,7 +10,7 @@ import { Recipe } from '../types/Recipe';
 })
 export class RecipesContainerComponent implements OnInit {
 
-  recipes: Array<Recipe> = [];
+  recipes: Array<Recipe> = null;
   categories: string[] = [ 'Основные блюда', 'Супы', 'Выпечка', 'Десерты', 'Закуски', 'Салаты', 'Напитки', 'Соусы' ];
   selectedCategoryIndex: number = null;
 
