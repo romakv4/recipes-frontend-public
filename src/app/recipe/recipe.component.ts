@@ -8,7 +8,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class RecipeComponent {
 
   @Input() recipe;
-  @Output() onDelete = new EventEmitter<boolean>();
 
   fullRecipeVisibility = false;
 

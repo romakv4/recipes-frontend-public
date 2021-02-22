@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { RecipesContainerComponent } from './recipes-container/recipes-container.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddRecipeFormComponent } from './add-recipe-form/add-recipe-form.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
@@ -20,7 +19,6 @@ import { environment } from '../environments/environment';
     AppComponent,
     RecipesContainerComponent,
     RecipeComponent,
-    AddRecipeFormComponent,
   ],
   imports: [
     BrowserModule,

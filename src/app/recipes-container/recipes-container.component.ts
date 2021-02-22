@@ -11,13 +11,14 @@ import { Recipe } from '../types/Recipe';
 export class RecipesContainerComponent implements OnInit {
 
   recipes: Array<Recipe> = null;
+  currentFilteredData: Array<Recipe> = null;
   categories: string[] = [ 'Основные блюда', 'Супы', 'Выпечка', 'Десерты', 'Закуски', 'Салаты', 'Напитки', 'Соусы' ];
   selectedCategoryIndex: number = null;
 
   constructor(
     private recipesService: RecipesService,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.getRecipes()
@@ -29,7 +30,11 @@ export class RecipesContainerComponent implements OnInit {
     } else {
       this.router.navigate(['add'], { queryParams: { initialCategory: category }} );
     }
-    
+  }
+
+  fetchRecipesIfConnected() {
+    window.navigator.onLine ? this.getRecipes() : this.currentFilteredData = this.recipes;
+    this.selectedCategoryIndex = null;
   }
 
   getRecipes() {
@@ -37,6 +42,7 @@ export class RecipesContainerComponent implements OnInit {
     this.recipesService.getRecipes().subscribe(
       (data: Array<Recipe>) => {
         this.recipes = data;
+        this.currentFilteredData = data;
       },
       error => {
         console.log(error);
@@ -46,18 +52,7 @@ export class RecipesContainerComponent implements OnInit {
 
   selectCategory(index: number) {
     this.selectedCategoryIndex = index;
-    this.recipesService.getRecipesByCategory(this.categories[index]).subscribe(
-      (data: Array<Recipe>) => {
-        this.recipes = data;
-      },
-      error => {
-        console.log(error);
-      }
-    )
-  }
-
-  onDeleteRecipe() {
-    this.getRecipes();
+    this.currentFilteredData = this.recipes.filter(recipe => recipe.category == this.categories[index]);
   }
 
 }

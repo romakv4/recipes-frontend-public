@@ -15,13 +15,12 @@
         {{categories[selectedCategoryIndex]? categories[selectedCategoryIndex]: 'Все категории'}}
     </button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="getRecipes()">Очистить</button>
+        <button mat-menu-item (click)="fetchRecipesIfConnected()">Очистить</button>
         <button mat-menu-item *ngFor="let category of categories; index as i" (click)="selectCategory(i)">{{category}}</button>
     </mat-menu>
-    <button mat-flat-button color="primary" style="margin-top: 5px; margin-right: 5px;" (click)="toAddForm(categories[selectedCategoryIndex])">Добавить рецепт</button>
 </div>
 <div class="recipeContainer">
-    <mat-card *ngFor="let recipe of recipes" class="recipePreview">
-        <app-recipe [recipe]="recipe" (onDelete)="onDeleteRecipe()"></app-recipe>
+    <mat-card *ngFor="let recipe of currentFilteredData" class="recipePreview">
+        <app-recipe [recipe]="recipe"></app-recipe>
     </mat-card>
 </div>
