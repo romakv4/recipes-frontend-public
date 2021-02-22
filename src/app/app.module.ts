@@ -12,6 +12,8 @@ import { RecipesContainerComponent } from './recipes-container/recipes-container
 import { RecipeComponent } from './recipe/recipe.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddRecipeFormComponent } from './add-recipe-form/add-recipe-form.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { AddRecipeFormComponent } from './add-recipe-form/add-recipe-form.compon
     HttpClientModule,
     AppRoutingModule,
     NgxSkeletonLoaderModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
