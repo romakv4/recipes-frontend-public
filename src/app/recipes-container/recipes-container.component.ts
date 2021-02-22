@@ -52,7 +52,18 @@ export class RecipesContainerComponent implements OnInit {
 
   selectCategory(index: number) {
     this.selectedCategoryIndex = index;
-    this.currentFilteredData = this.recipes.filter(recipe => recipe.category == this.categories[index]);
+    if (window.navigator.onLine) {
+      this.recipesService.getRecipesByCategory(this.categories[index]).subscribe(
+        (data: Array<Recipe>) => {
+          this.currentFilteredData = data;
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    } else {
+      this.currentFilteredData = this.recipes.filter(recipe => recipe.category == this.categories[index]);
+    }
   }
 
 }
