@@ -16,6 +16,8 @@ export class RecipesContainerComponent implements OnInit {
   categories: string[] = [ 'Основные блюда', 'Супы', 'Выпечка', 'Десерты', 'Закуски', 'Салаты', 'Напитки', 'Соусы' ];
   selectedCategoryIndex: number = null;
 
+  updateAvailable = false;
+
   constructor(
     private recipesService: RecipesService,
     private router: Router,
@@ -71,10 +73,16 @@ export class RecipesContainerComponent implements OnInit {
 
   checkUpdates() {
     if (!this.updates.isEnabled) {
+      this.updateAvailable = false;
       return;
     }
     this.updates.available.subscribe(event => {
-      this.updates.activateUpdate().then(() => document.location.reload());
+      this.updateAvailable = true;
     });
   }
+
+  updateApp() {
+    this.updates.activateUpdate().then(() => document.location.reload());
+  }
+
 }
