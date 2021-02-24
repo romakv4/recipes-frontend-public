@@ -21,10 +21,9 @@ export class RecipeComponent {
     this.fullRecipeVisibility = !this.fullRecipeVisibility;
   }
 
-  shareRecipe() {
-    navigator.share({
-      text: this.getRecipeTextPresentationForSharing()
-    });
+  async shareRecipe() {
+    const text = this.getRecipeTextPresentationForSharing();
+    await navigator.share({text});
   }
 
   getRecipeTextPresentationForSharing() {
