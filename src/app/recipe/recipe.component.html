@@ -24,8 +24,3 @@
     <button mat-flat-button color="primary" *ngIf="fullRecipeVisibility" (click)="toggleFDVisibility()">Скрыть</button>
     <button mat-flat-button *ngIf="isShareSupported" (click)="shareRecipe()" color="primary">Поделиться</button>
 </mat-card-actions>
-<mat-card-actions>
-    <button mat-flat-button color="primary" *ngIf="!fullRecipeVisibility" (click)="toggleFDVisibility()">Полное описание</button>
-    <button mat-flat-button color="primary" *ngIf="fullRecipeVisibility" (click)="toggleFDVisibility()">Скрыть</button>
-    <button mat-flat-button *ngIf="isShareSupported" (click)="shareRecipe()" color="primary">Поделиться</button>
-</mat-card-actions>
