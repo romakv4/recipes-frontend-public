@@ -14,6 +14,9 @@
     <button mat-flat-button color="primary" style="margin-top: 5px; margin-right: 5px;" [matMenuTriggerFor]="menu">
         {{categories[selectedCategoryIndex]? categories[selectedCategoryIndex]: 'Все категории'}}
     </button>
+    <button mat-flat-button color="primary" style="margin-top: 5px; margin-right: 5px;" [matMenuTriggerFor]="menu">
+        {{categories[selectedCategoryIndex]? categories[selectedCategoryIndex]: 'Все категории'}}
+    </button>
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="fetchRecipesIfConnected()">Очистить</button>
         <button mat-menu-item *ngFor="let category of categories; index as i" (click)="selectCategory(i)">{{category}}</button>
