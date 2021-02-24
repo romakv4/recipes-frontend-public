@@ -22,5 +22,5 @@
 <mat-card-actions>
     <button mat-flat-button color="primary" *ngIf="!fullRecipeVisibility" (click)="toggleFDVisibility()">Полное описание</button>
     <button mat-flat-button color="primary" *ngIf="fullRecipeVisibility" (click)="toggleFDVisibility()">Скрыть</button>
-    <button mat-flat-button *ngIf="isShareSupported" (click)="shareRecipe()" color="primary">Поделиться</button>
+    <button mat-icon-button *ngIf="isShareSupported" (click)="shareRecipe()" color="primary"><mat-icon>share</mat-icon></button>
 </mat-card-actions>
