@@ -7,7 +7,6 @@
       "installMode": "prefetch",
       "resources": {
         "files": [
-          "/favicon.ico",
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
@@ -35,7 +34,7 @@
     {
       "name": "api-freshness",
       "urls": [
-        "//recipes-backend-public.vercel.app/recipes"
+        "https://recipes-backend-public.vercel.app/recipes"
       ],
       "cacheConfig": {
         "strategy": "freshness",
