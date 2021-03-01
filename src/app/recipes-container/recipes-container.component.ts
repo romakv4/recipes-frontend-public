@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { RecipesService } from '../services/recipes.service';
 import { Recipe } from '../types/Recipe';
@@ -20,21 +19,12 @@ export class RecipesContainerComponent implements OnInit {
 
   constructor(
     private recipesService: RecipesService,
-    private router: Router,
     private updates: SwUpdate,
   ) { }
 
   ngOnInit(): void {
     this.getRecipes();
     this.checkUpdates();
-  }
-
-  toAddForm(category: string) {
-    if (category == null) {
-      this.router.navigate(['add']);
-    } else {
-      this.router.navigate(['add'], { queryParams: { initialCategory: category }} );
-    }
   }
 
   fetchRecipesIfConnected() {
