@@ -29,7 +29,7 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     AppRoutingModule,
     NgxSkeletonLoaderModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, scope: "./" }),
+    ServiceWorkerModule.register('service-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]

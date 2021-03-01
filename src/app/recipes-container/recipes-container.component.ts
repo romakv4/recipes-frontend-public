@@ -62,7 +62,7 @@ export class RecipesContainerComponent implements OnInit {
   }
 
   checkUpdates() {
-    if (!this.updates.isEnabled) {
+    if (!window.navigator.onLine || !this.updates.isEnabled) {
       this.updateAvailable = false;
       return;
     }
