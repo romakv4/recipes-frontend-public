@@ -33,14 +33,14 @@
   ],
   "dataGroups": [
     {
-      "name": "api-freshness",
+      "name": "api",
       "urls": [
-        "//recipes-backend-public.vercel.app/recipes"
+        "//recipes-backend-public.vercel.app/**"
       ],
       "cacheConfig": {
         "strategy": "freshness",
         "maxSize": 100,
-        "maxAge": "3d",
+        "maxAge": "1d",
         "timeout": "10s"
       }
     }
