@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SwUpdate } from '@angular/service-worker';
 import { RecipesService } from '../services/recipes.service';
 import { Recipe } from '../types/Recipe';
 
@@ -16,17 +15,13 @@ export class RecipesContainerComponent implements OnInit {
   categories: string[] = [ 'Основные блюда', 'Супы', 'Выпечка', 'Десерты', 'Закуски', 'Салаты', 'Напитки', 'Соусы' ];
   selectedCategoryIndex: number = null;
 
-  updateAvailable = false;
-
   constructor(
     private recipesService: RecipesService,
     private router: Router,
-    private updates: SwUpdate,
   ) { }
 
   ngOnInit(): void {
     this.getRecipes();
-    this.checkUpdates();
   }
 
   toAddForm(category: string) {
@@ -70,19 +65,4 @@ export class RecipesContainerComponent implements OnInit {
       this.currentFilteredData = this.recipes.filter(recipe => recipe.category == this.categories[index]);
     }
   }
-
-  checkUpdates() {
-    if (!this.updates.isEnabled) {
-      this.updateAvailable = false;
-      return;
-    }
-    this.updates.available.subscribe(event => {
-      this.updateAvailable = true;
-    });
-  }
-
-  updateApp() {
-    this.updates.activateUpdate().then(() => document.location.reload());
-  }
-
 }
