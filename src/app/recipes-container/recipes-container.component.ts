@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { RecipesService } from '../services/recipes.service';
 import { Recipe } from '../types/Recipe';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-recipes-container',
@@ -15,26 +17,35 @@ export class RecipesContainerComponent implements OnInit {
   categories: string[] = [ 'Основные блюда', 'Супы', 'Выпечка', 'Десерты', 'Закуски', 'Салаты', 'Напитки', 'Соусы' ];
   selectedCategoryIndex: number = null;
 
+  searchControl = new FormControl();
+  recipeNames: string[] = [];
+  filteredRecipeNames: Observable<string[]>;
+
   constructor(
     private recipesService: RecipesService,
-    private router: Router,
   ) { }
 
   ngOnInit(): void {
     this.getRecipes();
+    this.filteredRecipeNames = this.searchControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
   }
 
-  toAddForm(category: string) {
-    if (category == null) {
-      this.router.navigate(['add']);
-    } else {
-      this.router.navigate(['add'], { queryParams: { initialCategory: category }} );
-    }
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.recipeNames.filter(name => name.toLowerCase().includes(filterValue));
   }
 
   fetchRecipesIfConnected() {
     window.navigator.onLine ? this.getRecipes() : this.currentFilteredData = this.recipes;
     this.selectedCategoryIndex = null;
+  }
+
+  onSelectName(event) {
+    this.currentFilteredData = this.currentFilteredData.filter(recipe => recipe.name === event.option.value);
   }
 
   getRecipes() {
@@ -43,6 +54,8 @@ export class RecipesContainerComponent implements OnInit {
       (data: Array<Recipe>) => {
         this.recipes = data;
         this.currentFilteredData = data;
+        this.recipeNames = [];
+        data.forEach(recipe => this.recipeNames.push(recipe.name));
       },
       error => {
         console.log(error);
@@ -52,10 +65,13 @@ export class RecipesContainerComponent implements OnInit {
 
   selectCategory(index: number) {
     this.selectedCategoryIndex = index;
+    this.searchControl.setValue('');
     if (window.navigator.onLine) {
       this.recipesService.getRecipesByCategory(this.categories[index]).subscribe(
         (data: Array<Recipe>) => {
           this.currentFilteredData = data;
+          this.recipeNames = [];
+          data.forEach(recipe => this.recipeNames.push(recipe.name));
         },
         error => {
           console.log(error);
@@ -63,6 +79,8 @@ export class RecipesContainerComponent implements OnInit {
       )
     } else {
       this.currentFilteredData = this.recipes.filter(recipe => recipe.category == this.categories[index]);
+      this.recipeNames = [];
+      this.recipes.forEach(recipe => this.recipeNames.push(recipe.name));
     }
   }
 }
