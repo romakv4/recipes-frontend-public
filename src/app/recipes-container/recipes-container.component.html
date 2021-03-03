@@ -21,7 +21,7 @@
                 [formControl]="searchControl"
                 [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectName($event)">
-                <mat-option *ngFor="let recipeName of filteredRecipeNames | async" [value]="recipeName">
+                <mat-option *ngFor="let recipeName of recipeNames" [value]="recipeName">
                     {{recipeName}}
                 </mat-option>
             </mat-autocomplete>

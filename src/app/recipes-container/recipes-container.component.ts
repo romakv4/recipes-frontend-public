@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RecipesService } from '../services/recipes.service';
 import { Recipe } from '../types/Recipe';
 import { map, startWith } from 'rxjs/operators';
@@ -18,8 +18,8 @@ export class RecipesContainerComponent implements OnInit {
   selectedCategoryIndex: number = null;
 
   searchControl = new FormControl();
-  recipeNames: string[] = [];
-  filteredRecipeNames: Observable<string[]>;
+  recipeNames: Array<string> = [];
+  filteredRecipeNames: Observable<Array<string>> = of(this.recipeNames);
 
   constructor(
     private recipesService: RecipesService,
@@ -80,7 +80,7 @@ export class RecipesContainerComponent implements OnInit {
     } else {
       this.currentFilteredData = this.recipes.filter(recipe => recipe.category == this.categories[index]);
       this.recipeNames = [];
-      this.recipes.forEach(recipe => this.recipeNames.push(recipe.name));
+      this.currentFilteredData.forEach(recipe => this.recipeNames.push(recipe.name));
     }
   }
 }
