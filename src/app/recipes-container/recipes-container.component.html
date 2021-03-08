@@ -31,7 +31,7 @@
         {{categories[selectedCategoryIndex]? categories[selectedCategoryIndex]: 'Все категории'}}
     </button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="fetchRecipesIfConnected(); this.searchControl.setValue('')">Очистить</button>
+        <button mat-menu-item (click)="fetchRecipesIfConnected()">Очистить</button>
         <button mat-menu-item *ngFor="let category of categories; index as i" (click)="selectCategory(i)">{{category}}</button>
     </mat-menu>
 </div>

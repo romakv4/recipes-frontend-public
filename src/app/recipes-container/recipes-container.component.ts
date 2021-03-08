@@ -49,6 +49,8 @@ export class RecipesContainerComponent implements OnInit {
   fetchRecipesIfConnected() {
     window.navigator.onLine ? this.getRecipes() : this.currentFilteredData = this.recipes;
     this.selectedCategoryIndex = null;
+    this.searchControl.setValue('');
+    this.alphabetSelectorApplied = false;
   }
 
   onSelectName(event) {
