@@ -1,0 +1,8 @@
+<mat-dialog-content class="mat-typography">
+    <h3>Выберите букву:</h3>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div *ngFor="let letter of alphabet">
+        <button mat-button [mat-dialog-close]="letter">{{letter}}</button>
+    </div>
+</mat-dialog-actions>

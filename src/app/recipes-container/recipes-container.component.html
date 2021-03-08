@@ -40,3 +40,21 @@
         <app-recipe [recipe]="recipe"></app-recipe>
     </mat-card>
 </div>
+
+<button
+    mat-mini-fab
+    color="primary"
+    style="position: fixed; bottom: 10px; right: 10px;"
+    (click)="openAlphabetModal()"
+>
+    <mat-icon>sort_by_alpha</mat-icon>
+</button>
+<button
+    mat-mini-fab
+    *ngIf="alphabetSelectorApplied"
+    color="primary"
+    style="position: fixed; bottom: 10px; right: 60px;"
+    (click)="resetAlphabetFilter()"
+>
+    <mat-icon>clear</mat-icon>
+</button>

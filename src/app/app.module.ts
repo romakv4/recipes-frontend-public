@@ -13,12 +13,14 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { AlphabetSelectModalComponent } from './alphabet-select-modal/alphabet-select-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RecipesContainerComponent,
     RecipeComponent,
+    AlphabetSelectModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,6 @@ import { environment } from '../environments/environment';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

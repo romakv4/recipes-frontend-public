@@ -4,6 +4,9 @@ import { Observable, of } from 'rxjs';
 import { RecipesService } from '../services/recipes.service';
 import { Recipe } from '../types/Recipe';
 import { map, startWith } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { AlphabetSelectModalComponent } from '../alphabet-select-modal/alphabet-select-modal.component';
+import { RecipesWithAlphabet } from '../types/RecipesWithAlphabet';
 
 @Component({
   selector: 'app-recipes-container',
@@ -21,8 +24,12 @@ export class RecipesContainerComponent implements OnInit {
   recipeNames: Array<string> = [];
   filteredRecipeNames: Observable<Array<string>> = of(this.recipeNames);
 
+  alphabet: Array<String> = [];
+  alphabetSelectorApplied = false;
+
   constructor(
     private recipesService: RecipesService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -51,11 +58,13 @@ export class RecipesContainerComponent implements OnInit {
   getRecipes() {
     this.selectedCategoryIndex = null;
     this.recipesService.getRecipes().subscribe(
-      (data: Array<Recipe>) => {
-        this.recipes = data;
-        this.currentFilteredData = data;
+      (data: RecipesWithAlphabet) => {
+        const { recipes, alphabet } = data;
+        this.recipes = recipes;
+        this.currentFilteredData = recipes;
         this.recipeNames = [];
-        data.forEach(recipe => this.recipeNames.push(recipe.name));
+        recipes.forEach(recipe => this.recipeNames.push(recipe.name));
+        this.alphabet = alphabet;
       },
       error => {
         console.log(error);
@@ -68,10 +77,12 @@ export class RecipesContainerComponent implements OnInit {
     this.searchControl.setValue('');
     if (window.navigator.onLine) {
       this.recipesService.getRecipesByCategory(this.categories[index]).subscribe(
-        (data: Array<Recipe>) => {
-          this.currentFilteredData = data;
+        (data: RecipesWithAlphabet) => {
+          const { recipes, alphabet } = data;
+          this.currentFilteredData = recipes;
           this.recipeNames = [];
-          data.forEach(recipe => this.recipeNames.push(recipe.name));
+          recipes.forEach(recipe => this.recipeNames.push(recipe.name));
+          this.alphabet = alphabet;
         },
         error => {
           console.log(error);
@@ -82,5 +93,25 @@ export class RecipesContainerComponent implements OnInit {
       this.recipeNames = [];
       this.currentFilteredData.forEach(recipe => this.recipeNames.push(recipe.name));
     }
+  }
+
+  openAlphabetModal() {
+    const dialogRef = this.dialog.open(AlphabetSelectModalComponent, { autoFocus: false, data: this.alphabet });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const filtered = this.currentFilteredData.filter(recipe => recipe.name.toLocaleLowerCase().startsWith(result));
+        if (filtered.length !== 0) {
+          this.currentFilteredData = filtered;
+          this.alphabetSelectorApplied = true;
+        }
+      }
+      this.recipeNames = [];
+      this.currentFilteredData.forEach(recipe => this.recipeNames.push(recipe.name));
+    });
+  }
+
+  resetAlphabetFilter() {
+    this.currentFilteredData = this.recipes;
+    this.alphabetSelectorApplied = false;
   }
 }
